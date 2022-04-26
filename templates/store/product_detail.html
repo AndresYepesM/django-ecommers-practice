@@ -4,90 +4,71 @@
 
 {% block content %}
 
-<section class="section-content padding-y bg">
+  <section class="section-content padding-y bg">
     <div class="container">
-    
-    <!-- ============================ COMPONENT 1 ================================= -->
-    <div class="card">
+      <div class="card">
         <div class="row no-gutters">
-            <aside class="col-md-6">
-    <article class="gallery-wrap"> 
-        <div class="img-big-wrap">
-           <a href="#"><img src="{{item.images.url}}"></a>
-        </div> <!-- img-big-wrap.// -->
-        
-    </article> <!-- gallery-wrap .end// -->
-            </aside>
-            <main class="col-md-6 border-left">
-    <article class="content-body">
+
+          <aside class="col-md-6">
+            <article class="gallery-wrap"> 
+              <div class="img-big-wrap">
+                <a href="#"><img src="{{item.images.url}}"></a>
+              </div> <!-- img-big-wrap.// -->
+            </article> <!-- gallery-wrap .end// -->
+          </aside>
+
+          <main class="col-md-6 border-left">
+            <form action="{% url 'add_cart' item.id %}" method="POST">
+              {% csrf_token %}
+              <article class="content-body">
+                <h2 class="title">{{item.product_name}}</h2>
     
-    <h2 class="title">{{item.product_name}}</h2>
-    
-    <div class="mb-3"> 
-        <var class="price h4">${{item.price}}</var> 
-    </div> 
-    
-    <p>{{item.description}}</p>
-    
-    <hr>
-        <div class="row">
-            <div class="item-option-select">
-                <h6>Choose Color</h6>
-                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> Silver
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" > Gray
-                  </label>
-                  <label class="btn btn-light active">
-                    <input type="radio" name="radio_color checked"> Gold
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> Black
-                  </label>
+                <div class="mb-3"> 
+                  <var class="price h4">${{item.price}}</var> 
                 </div> 
-            </div>
-        </div> <!-- row.// -->
-        <div class="row">
-            <div class="item-option-select">
-                <h6>Select Size</h6>
-                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> S
-                  </label>
-                  <label class="btn btn-light active">
-                    <input type="radio" name="radio_color" checked> M
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> L
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> XL
-                  </label>
+    
+                <p>{{item.description}}</p>
+    
+                <hr>
+
+                <div class="row">
+                  <div class="item-option-select">
+                    <h6>Choose Color</h6>
+                    <select name="color" class="form-control" required>
+                      <option value="" disabled selected>Select</option>
+                      {% for i in item.variation_set.colors %}
+                        <option value="{{i.variation_value | lower }}">{{i.variation_value | capfirst}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div> 
-            </div>
-        </div> <!-- row.// -->
-        <hr>
-        {% if item.stock <= 0 %}
-          
-          <h5 class="text-danger"> Out of stock.</h5>
-        {% else %}
-          {% if in_cart %}
-          <a href="#" class="btn  btn-success"> <span class="text">Added to cart</span> <i class="fas fa-check"></i>  </a>
-          <a href="{% url 'cart' %}" class="btn  btn-outline-primary"> <span class="text">View Cart</span> <i class="fas fa-eye"></i>  </a>
-          {% else %}
-            <a href="{% url 'add_cart' item.id %}" class="btn  btn-primary"> <span class="text">Add to Cart</span> <i class="fas fa-shopping-cart"></i>  </a>
-          {% endif %}
-        {% endif %}
-    </article> <!-- product-info-aside .// -->
-            </main> <!-- col.// -->
-        </div> <!-- row.// -->
+
+                <div class="row">
+                  <div class="item-option-select">
+                    <h6>Select Size</h6>
+                    <select name="size" class="form-control">
+                      <option value="" disabled selected>Select</option>
+                      {% for i in item.variation_set.sizes %}
+                        <option value="{{i.variation_value | lower }}">{{i.variation_value | capfirst}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div> 
+
+                <hr>
+                {% if item.stock <= 0 %}    
+                  <h5 class="text-danger"> Out of stock.</h5>
+                {% else %}
+                    <button class="btn  btn-primary" type="submit" ><span class="text">Add to Cart</span><i class="fas fa-shopping-cart"></i></button>
+                {% endif %}
+              </article> <!-- product-info-aside .// -->
+            </form>
+          </main> <!-- col.// -->
+      </div> <!-- row.// -->
     </div> <!-- card.// -->
     <!-- ============================ COMPONENT 1 END .// ================================= -->
     
     <br>
-    
     <div class="row">
                 <div class="col-md-9">
     
@@ -121,7 +102,5 @@
     
     
     </div> <!-- container .//  -->
-    </section>
-    <!-- ========================= SECTION CONTENT END// ========================= -->
-
+  </section>
 {% endblock %}

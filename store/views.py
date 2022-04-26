@@ -10,8 +10,10 @@ from datetime import date
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import Product
 from category.models import Category
+from django.db.models import Q
 from carts.views import _cart_id
 from carts.models import CartItem
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 # Create your views here.
 
 
@@ -25,14 +27,21 @@ def store(request, category_slug=None):
     if category_slug != None:
         categories = get_object_or_404(Category, slug=category_slug)
         items = Product.objects.filter(category=categories, is_available=True)
+        paginator = Paginator(items, 3)
+        page = request.GET.get('page')
+        paged_items = paginator.get_page(page)
         product_count = items.count()
     else:
         # Display all the products  
-        items= Product.objects.all().filter(is_available=True)
+        items = Product.objects.all().filter(is_available=True).order_by('id')
+        paginator = Paginator(items, 3)
+        # page se puede cambiar
+        page = request.GET.get('page')
+        paged_items = paginator.get_page(page)
         product_count = items.count()
 
     context = {
-        'items':items,
+        'items':paged_items,
         'product_count': product_count
     }
 
@@ -53,3 +62,16 @@ def product_detail(request, category_slug, product_slug):
         'in_cart': in_cart
     }
     return render(request, 'store/product_detail.html', context)
+
+
+def search(request):
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            items = Product.objects.order_by('-created_date').filter(Q(description__icontains=keyword) | Q(product_name__icontains=keyword))
+            product_count = items.count()
+    context={
+        'items':items,
+        'product_count': product_count,
+    }
+    return render(request, 'store/store.html', context)
