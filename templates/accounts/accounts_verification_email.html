@@ -1,0 +1,11 @@
+{% autoescape off %}
+
+Hi {{user.first_name}} {{user.last_name}},
+
+welcome and thank you to sing in on our web page
+to finish your registration please click below to confirm your registration.
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+if you think is not you please ignore this email
+
+{% endautoescape %}
