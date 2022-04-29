@@ -4,7 +4,7 @@
     <div id="message" class="container">
         <div {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %} role="alert">
             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="True">&times;</span></button>
-            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error:{% endif %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Upps, {% endif %}
             {{ message }}
         </div>
     </div>
