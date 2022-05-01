@@ -1,5 +1,5 @@
 from django import forms
-from .models import Account
+from .models import Account, UserProfile
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
@@ -50,3 +50,46 @@ class RegistrationForm(forms.ModelForm):
                 raise forms.ValidationError('Password need at least 8 characters')
         else:
             raise forms.ValidationError('Password not match')
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = Account
+
+        fields = [
+            'first_name',
+            'last_name',
+            'phone_num'
+        ]
+    def __init__(self,*args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['first_name']
+        self.fields['last_name']
+        self.fields['phone_num']
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']= 'form-control'
+
+class UserProfileForm(forms.ModelForm):
+    profile_picture = forms.ImageField(required=False, error_messages = {'invalid':("Image files only")}, widget=forms.FileInput)
+    class Meta:
+        model = UserProfile
+
+        fields =[
+            'address_line1',
+            'address_line2',
+            'profile_picture',
+            'city',
+            'state',
+            'country'
+        ]
+
+    def __init__(self,*args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        self.fields['address_line1']
+        self.fields['address_line2']
+        self.fields['profile_picture']
+        self.fields['city']
+        self.fields['state']
+        self.fields['country']
+        for field in self.fields:
+            self.fields[field].widget.attrs['class']= 'form-control'

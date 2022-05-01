@@ -8,9 +8,17 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from datetime import date
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from store.models import Product
+from store.models import Product, ReviewRating
 
 def home(request):
-    items= Product.objects.all().filter(is_available=True)
-    context = {'items':items,}
+    items= Product.objects.all().filter(is_available=True).order_by('created_date')
+
+    # calculando el rate 
+    for item in items:
+        reviews = ReviewRating.objects.filter(product_id=item.id, status=True)
+
+    context = {
+        'items':items,
+        'reviews': reviews,
+    }
     return render(request, 'home.html', context)

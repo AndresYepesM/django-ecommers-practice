@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from datetime import date
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from .models import Product, ReviewRating
+from .models import Product, ReviewRating, ProductGallery
 from .forms import ReviewForm
 from category.models import Category
 from django.db.models import Q
@@ -68,14 +68,19 @@ def product_detail(request, category_slug, product_slug):
             order_product = None
     else:
         order_product = None
+        
     # calculando el rate 
     reviews = ReviewRating.objects.filter(product_id=single_product, status=True)
+
+    #Get the product gallery
+    product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
 
     context = {
         'item': single_product,
         'in_cart': in_cart,
         'order_product': order_product,
         'reviews': reviews,
+        'product_gallery': product_gallery,
     }
     return render(request, 'store/product_detail.html', context)
 

@@ -11,10 +11,17 @@
 
           <aside class="col-md-6">
             <article class="gallery-wrap"> 
-              <div class="img-big-wrap">
-                <a href="#"><img src="{{item.images.url}}"></a>
+              <div class="img-big-wrap mainImage">
+                <center><img src="{{item.images.url}}"></center> 
               </div> <!-- img-big-wrap.// -->
             </article> <!-- gallery-wrap .end// -->
+            <ul class="thumb">
+              <li>
+                {% for i in product_gallery %}
+                  <a href="{{ i.image.url }}" target="mainImage"><img src="{{ i.image.url }}" alt="Poduct Image"></a>
+                {% endfor %}
+              </li>
+            </ul>
           </aside>
 
           <main class="col-md-6 border-left">
