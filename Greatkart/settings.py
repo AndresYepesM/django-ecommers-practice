@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True ,cast=bool)
 
-ALLOWED_HOSTS = ['greatekart-course-env.eba-kvat25f3.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,8 +77,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processors.menu_links',
-                'carts.context_processors.counter',greatekart-course-env.eba-kvat25f3.us-west-2.elasticbeanstalk.com
-
+                'carts.context_processors.counter',
+            ]
+        }
+    }
 ]
 
 WSGI_APPLICATION = 'Greatkart.wsgi.application'
