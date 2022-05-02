@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container" style="margin: 0 auto;width: 50%;padding: 50px;background: #f1f1f1;margin-top: 50px;margin-bottom: 50px;">
+        <div class="row invoice row-printable">
+            <div class="col-md-12">
+                <!-- col-lg-12 start here -->
+                <div class="panel panel-default plain" id="dash_0">
+                    <!-- Start .panel -->
+                    <div class="panel-body p30">
+                        <div class="row">
+                            <div class="col-md-12">
+                              <p class="text-center">
+                                <a class="btn btn-primary btn-lg btn-block" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">About me</a>
+                                <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">My links</button>
+                              </p>
+                              <div class="row">
+                                <div class="col">
+                                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                    <div class="card card-body">
+                                      <div class="card" style="width: 30rem;">
+                                        <img src="{% static './images/me.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Hi, im Andres Yepes</h5>
+                                          <p class="card-text">
+                                            Skilled programmer in application development, testing and optimization.
+                                            Excels at coordinating ground-up planning, programming and
+                                            implementation for core modules. Maintains strong object-oriented and
+                                            software architecture fundamentals. Hardworking and reliable web
+                                            developing with strong ability in backed and frontend. Offering
+                                            Django/Python, JavaScript HTML/CSS. Highly motivated individual.
+                                            Successful communicator with over a year in web development business
+                                            world. Committed to maintaining professionalism and creating innovative
+                                            programs, eager to learn and out of the box thinker, lover of challenges.
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col">
+                                  <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                    <div class="card card-body">
+                                      <div class="card" style="width: 18rem;">
+                                        <div class="card-header">
+                                          My links:
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">
+                                            Cras justo odio:
+                                            <a href="">Link1</a>
+                                          </li>
+                                          <li class="list-group-item">
+                                            Cras justo odio:
+                                            <a href="">Link1</a>
+                                          </li>
+                                          <li class="list-group-item">
+                                            Cras justo odio:
+                                            <a href="">Link1</a>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    

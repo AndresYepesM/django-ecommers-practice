@@ -1,5 +1,7 @@
 {% load static %}
-
+<div class="alert alert-primary" role="alert">
+    If you want to try the Paypal Payment you can use this sandbox account  <strong>Sando box Email: account@exxample.com</strong> ----- <strong>sandbox Password: Example123456</strong>
+</div>
 <header class="section-header">
     <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
     <div class="container">
@@ -9,16 +11,12 @@
       <div class="collapse navbar-collapse" id="navbarTop4">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                 <a href="#" class="nav-link">   English </a>
-                
-            </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link"> USD </a>
+                <p class="nav-link active">Current currency USD </p>
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-            <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
+            <li><a href="{% url 'contact_me' %}" class="nav-link"> <i class="fa fa-envelope"></i>Contact me</a></li>
+            <li><a href="{% url 'call_me' %}" class="nav-link"> <i class="fa fa-phone"></i> Call me </a></li>
         </ul> <!-- list-inline //  -->
       </div> <!-- navbar-collapse .// -->
     </div> <!-- container //  -->
