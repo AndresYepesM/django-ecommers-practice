@@ -22,3 +22,10 @@ def home(request):
         'reviews': reviews,
     }
     return render(request, 'home.html', context)
+
+
+def contact_me(request):
+    return render(request, 'contact/email.html')
+
+def call_me(request):
+    return render(request, 'contact/callme.html')
